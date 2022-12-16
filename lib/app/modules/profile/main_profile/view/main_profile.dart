@@ -273,13 +273,16 @@ class _MainProfilePageState extends State<MainProfilePage> {
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(10)),
                                   color: AppColors.white),
-                              child: Column(children: [
-                                TimeLineTileWidget(isCheckedValue: isChecked1),
-                                TimeLineTileWidget(isCheckedValue: isChecked2),
-                                TimeLineTileWidget(isCheckedValue: isChecked3),
-                                TimeLineTileWidget(isCheckedValue: isChecked4),
-                                TimeLineTileWidget(isCheckedValue: isChecked5),
-                              ]),
+                              child: Padding(
+                                padding:  EdgeInsets.only(left: Dimensions.width20),
+                                child: Column(children: [
+                                  TimeLineTileWidget(isCheckedValue: isChecked1, showEndConnector: true, timeLineText: 'Applied Successfully',),
+                                  TimeLineTileWidget(isCheckedValue: isChecked2, showStartConnector: true, showEndConnector: true, timeLineText: 'Job Accepted',),
+                                  TimeLineTileWidget(isCheckedValue: isChecked3, showStartConnector: true, showEndConnector: true, timeLineText: 'Working',),
+                                  TimeLineTileWidget(isCheckedValue: isChecked4, showStartConnector: true, showEndConnector: true, timeLineText: 'Job Done',) ,
+                                  TimeLineTileWidget(isCheckedValue: isChecked5, showStartConnector: true, timeLineText: 'Payment Recieved',),
+                                ]),
+                              ),
                             )
                           : SizedBox(
                               height: Dimensions.height10,
