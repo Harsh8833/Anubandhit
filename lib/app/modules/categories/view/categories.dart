@@ -40,7 +40,9 @@ class _CategoriesState extends State<Categories> {
             BigText(text: 'Categories',size: Dimensions.font26*1.23,
                       fontWeight: FontWeight.bold,),
                       SizedBox(height: Dimensions.height15),
-                      Expanded(child: GridView.builder(gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      Expanded(child: GridView.builder(
+                        itemCount: 5,
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2
                       ), itemBuilder: ((context, index) =>SizedBox(
                         height: Dimensions.height10*14,

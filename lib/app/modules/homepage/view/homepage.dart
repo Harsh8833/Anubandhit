@@ -42,7 +42,7 @@ HomePage({super.key});
                       ],
                     ),
                     BigText(
-                      text: 'Job Opening',
+                    text: 'Job Opening',
                       size: Dimensions.font26*1.23,
                       fontWeight: FontWeight.bold,
                     ),
