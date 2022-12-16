@@ -14,7 +14,7 @@ HomePage({super.key});
     return SafeArea(
         child: Scaffold(
           key: _scaffoldKey,
-          drawer: Drawer(),
+          drawer: const Drawer(),
       body: Column(children: [
         Expanded(
             child: Padding(
@@ -36,7 +36,7 @@ HomePage({super.key});
                         ),
                         CircleAvatar(
                           radius: Dimensions.width20,
-                          backgroundImage: NetworkImage(
+                          backgroundImage: const NetworkImage(
                               'https://blog.readyplayer.me/content/images/2021/04/IMG_0689.PNG'),
                         ),
                       ],

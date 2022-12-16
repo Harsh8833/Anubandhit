@@ -3,6 +3,7 @@
 import 'package:anubandhit/widgets/big_text.dart';
 import 'package:anubandhit/widgets/button.dart';
 import 'package:anubandhit/widgets/timeline_tile.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:timelines/timelines.dart';
 
@@ -10,15 +11,20 @@ import '../../../../../utils/colors.dart';
 import '../../../../../utils/dimensions.dart';
 
 class MainProfilePage extends StatefulWidget {
+  final Function(User?) onSignOut;
   static launch(BuildContext context) =>
       Navigator.pushNamed(context, '/main-profile');
-  const MainProfilePage({super.key});
+  MainProfilePage({super.key,required this.onSignOut});
 
   @override
-  State<MainProfilePage> createState() => _MainProfilePageState();
+  // ignore: no_logic_in_create_state
+  State<MainProfilePage> createState() => _MainProfilePageState(onLogOut: onSignOut);
 }
 
 class _MainProfilePageState extends State<MainProfilePage> {
+  final Function(User?) onLogOut;
+  _MainProfilePageState({required this.onLogOut});
+  
   bool onTapBankDetails = false;
   bool onTapCurrentJobStatus = false;
   bool onTapWorkHistory = false;
@@ -27,6 +33,11 @@ class _MainProfilePageState extends State<MainProfilePage> {
   bool isChecked3 = false;
   bool isChecked4 = false;
   bool isChecked5 = false;
+
+  Future<void> logOut() async{
+    await FirebaseAuth.instance.signOut();
+    onLogOut(null);
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -362,7 +373,9 @@ class _MainProfilePageState extends State<MainProfilePage> {
               height: Dimensions.height15,
             ),
             Button(
-              on_pressed: () {},
+              on_pressed: () {
+                logOut();
+              },
               text: 'Log Out',
               width: Dimensions.width40 * 3.3,
               height: Dimensions.height20 * 2.6,

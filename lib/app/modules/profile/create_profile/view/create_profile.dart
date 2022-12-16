@@ -1,9 +1,12 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:anubandhit/app/modules/homepage/view/homepage.dart';
+import 'package:anubandhit/app/modules/homepage/view/tabBar.dart';
 import 'package:anubandhit/utils/colors.dart';
 import 'package:anubandhit/widgets/big_text.dart';
 import 'package:anubandhit/widgets/button.dart';
 import 'package:anubandhit/widgets/text_field.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 
@@ -29,6 +32,7 @@ class _CreateProfilePageState extends State<CreateProfilePage> {
     textEditingController.dispose();
     super.dispose();
   }
+  final Function(User?) x=(User){FirebaseAuth.instance.currentUser;};
 
   @override
   Widget build(BuildContext context) {
@@ -261,7 +265,9 @@ class _CreateProfilePageState extends State<CreateProfilePage> {
               ),
             ),
             Button(
-              on_pressed: () {},
+              on_pressed: () {
+                Navigator.of(context).push(MaterialPageRoute(builder: (context)=>TabBarWidget(onSignOut: x)));
+              },
               text: 'Continue',
               width: Dimensions.screenWidth * 0.8,
               

@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
+// ignore_for_file: must_be_immutable
 
+import 'package:flutter/material.dart';
 import '../utils/dimensions.dart';
 
 class BigText extends StatelessWidget {
