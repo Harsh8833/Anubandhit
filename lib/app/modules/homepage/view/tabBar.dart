@@ -10,20 +10,22 @@ import '../../../../utils/colors.dart';
 import '../../../../utils/dimensions.dart';
 import '../../profile/main_profile/view/main_profile.dart';
 
-
 class TabBarWidget extends StatefulWidget {
-  final Function(User?) onSignOut;
-  const TabBarWidget({super.key,required this.onSignOut});
+  static launch(BuildContext context) => Navigator.of(context).pushNamed('/tabbar');
+  // final Function(User?) onSignOut;
+  const TabBarWidget({super.key,
+  // onSignOutrequired this.
+  });
 
   @override
-  State<TabBarWidget> createState() => _TabBarWidgetState(onLogOut: onSignOut);
+  State<TabBarWidget> createState() => _TabBarWidgetState(
+      // onLogOut: onSignOut
+      );
 }
 
 class _TabBarWidgetState extends State<TabBarWidget> {
-  final Function(User?)? onLogOut;
-  _TabBarWidgetState({
-    required this.onLogOut
-  });
+  // final Function(User?)? onLogOut;
+  // _TabBarWidgetState({required this.onLogOut});
   late PersistentTabController _controller;
   @override
   void initState() {
@@ -34,34 +36,38 @@ class _TabBarWidgetState extends State<TabBarWidget> {
 
   List<Widget> _buildScreens() {
     return [
-       HomePage(),
+      HomePage(),
       Container(),
-      MainProfilePage(onSignOut: onLogOut!,),
-      
+      MainProfilePage(
+        // onSignOut: onLogOut!,
+      ),
     ];
   }
 
   List<PersistentBottomNavBarItem> _navBarsItems() {
     return [
       PersistentBottomNavBarItem(
-        icon:  Icon(CupertinoIcons.home, size: Dimensions.iconSize24*1.2),
-        
+        icon: Icon(CupertinoIcons.home, size: Dimensions.iconSize24 * 1.2),
         activeColorPrimary: AppColors.orange,
         inactiveColorPrimary: AppColors.grey,
       ),
       PersistentBottomNavBarItem(
-        icon:  Icon(Icons.mic ,color: AppColors.white, size: Dimensions.iconSize24*1.4,),
-       
+        icon: Icon(
+          Icons.mic,
+          color: AppColors.white,
+          size: Dimensions.iconSize24 * 1.4,
+        ),
         activeColorPrimary: AppColors.orange,
         inactiveColorPrimary: AppColors.orange,
       ),
       PersistentBottomNavBarItem(
-        icon:  Icon(Icons.person, size: Dimensions.iconSize24*1.2,),
-       
+        icon: Icon(
+          Icons.person,
+          size: Dimensions.iconSize24 * 1.2,
+        ),
         activeColorPrimary: AppColors.orange,
         inactiveColorPrimary: AppColors.grey,
       ),
-      
     ];
   }
 
@@ -69,8 +75,8 @@ class _TabBarWidgetState extends State<TabBarWidget> {
   Widget build(BuildContext context) {
     return PersistentTabView(
       context,
-      //* changed the default navBarHeight 
-       navBarHeight: Dimensions.navBarHeight50,
+      //* changed the default navBarHeight
+      navBarHeight: Dimensions.navBarHeight50,
       controller: _controller,
       screens: _buildScreens(),
       items: _navBarsItems(),
@@ -104,24 +110,23 @@ class _TabBarWidgetState extends State<TabBarWidget> {
     );
   }
 }
-  // Widget build(BuildContext context) {
-  //   const placeholder = Opacity(
-  //     opacity: 0,
-  //     child: IconButton(
-  //       icon: Icon(Icons.no_cell),
-  //       onPressed: null,
-  //     ),
-  //   );
-  //   return BottomAppBar(
-  //     child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-  //       buildTabItem(index: 0, icon: const Icon(Icons.home)),
-  //       SizedBox(width: MediaQuery.of(context).size.width*0.15,),
-  //       buildTabItem(index: 1, icon: const Icon(Icons.person_off_outlined)),
-  //     ]),
-  //   );
-  // }
+// Widget build(BuildContext context) {
+//   const placeholder = Opacity(
+//     opacity: 0,
+//     child: IconButton(
+//       icon: Icon(Icons.no_cell),
+//       onPressed: null,
+//     ),
+//   );
+//   return BottomAppBar(
+//     child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+//       buildTabItem(index: 0, icon: const Icon(Icons.home)),
+//       SizedBox(width: MediaQuery.of(context).size.width*0.15,),
+//       buildTabItem(index: 1, icon: const Icon(Icons.person_off_outlined)),
+//     ]),
+//   );
+// }
 
-  // Widget buildTabItem({required int index, required Icon icon}) {
-  //   return IconButton(onPressed: () {}, icon: icon);
-  // }
-
+// Widget buildTabItem({required int index, required Icon icon}) {
+//   return IconButton(onPressed: () {}, icon: icon);
+// }

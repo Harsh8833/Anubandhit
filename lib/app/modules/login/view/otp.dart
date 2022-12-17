@@ -58,7 +58,7 @@ class OtpScreen extends StatelessWidget {
                             shape: PinCodeFieldShape.box,
                             borderRadius: BorderRadius.circular(15),
                             activeColor: AppColors.orange,
-                            inactiveColor: AppColors.lightGreen,
+                            inactiveColor: AppColors.lightOrange,
                             selectedColor: AppColors.orange),
                         appContext: context,
                         length: 6,

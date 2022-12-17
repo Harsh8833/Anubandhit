@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "975494418934",
+    "project_id": "anubandhit-dd0f6",
+    "storage_bucket": "anubandhit-dd0f6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:975494418934:android:6de103afb317c5a0b737d7",
+        "android_client_info": {
+          "package_name": "com.example.anubandhit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "975494418934-t87iamlgvl18gb59rgmr04l3ud2kb8sd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA3dTMx-u8rGcZ08gnBRKci9rNu-WRMYpU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "975494418934-t87iamlgvl18gb59rgmr04l3ud2kb8sd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
