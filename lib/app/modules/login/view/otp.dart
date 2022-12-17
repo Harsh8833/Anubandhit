@@ -42,7 +42,7 @@ class OtpScreen extends StatelessWidget {
             ),
             Expanded(
                 child: Image.network(
-                    'https://t4.ftcdn.net/jpg/04/86/10/01/360_F_486100189_ui8qNNaWFeVRUUoCsFsjjRtXW7md6SRl.jpg')),
+                    'https://cdni.iconscout.com/illustration/premium/thumb/otp-security-4120631-3427365.png')),
             SizedBox(
               height: Dimensions.height15,
             ),

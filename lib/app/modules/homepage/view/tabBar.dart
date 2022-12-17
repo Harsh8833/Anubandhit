@@ -12,20 +12,19 @@ import '../../profile/main_profile/view/main_profile.dart';
 
 class TabBarWidget extends StatefulWidget {
   static launch(BuildContext context) => Navigator.of(context).pushNamed('/tabbar');
-  // final Function(User?) onSignOut;
+  
   const TabBarWidget({super.key,
-  // onSignOutrequired this.
+  
   });
 
   @override
   State<TabBarWidget> createState() => _TabBarWidgetState(
-      // onLogOut: onSignOut
+     
       );
 }
 
 class _TabBarWidgetState extends State<TabBarWidget> {
-  // final Function(User?)? onLogOut;
-  // _TabBarWidgetState({required this.onLogOut});
+  
   late PersistentTabController _controller;
   @override
   void initState() {
@@ -39,7 +38,7 @@ class _TabBarWidgetState extends State<TabBarWidget> {
       HomePage(),
       Container(),
       MainProfilePage(
-        // onSignOut: onLogOut!,
+        
       ),
     ];
   }

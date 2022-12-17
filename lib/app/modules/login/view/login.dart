@@ -1,10 +1,5 @@
 import 'package:anubandhit/app/modules/login/controller/login_controller.dart';
-import 'package:anubandhit/app/modules/login/view/otp.dart';
-import 'package:anubandhit/helper/loading.dart';
-import 'package:anubandhit/widgets/big_text.dart';
 import 'package:anubandhit/widgets/button.dart';
-import 'package:anubandhit/widgets/text_field.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../utils/colors.dart';
@@ -81,9 +76,11 @@ class _LoginState extends State<Login> {
                       SizedBox(
                         height: Dimensions.height15,
                       ),
-                      Button(on_pressed: (){
-                      
-                         controller.onSendOtp(context);
+                      Button(on_pressed: ()async{
+                      /*setState(() {
+                        CircularProgressIndicator();
+                      });*/
+                        await controller.onSendOtp(context);
                         
                       }, text: 'Send OTP',width: Dimensions.width40*8,
                         height: Dimensions.height40*1.5,radius: Dimensions.radius20,)

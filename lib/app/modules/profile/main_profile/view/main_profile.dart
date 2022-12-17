@@ -11,23 +11,20 @@ import '../../../../../utils/colors.dart';
 import '../../../../../utils/dimensions.dart';
 
 class MainProfilePage extends StatefulWidget {
-  // final Function(User?) onSignOut;
   static launch(BuildContext context) =>
       Navigator.pushNamed(context, '/main-profile');
   MainProfilePage({super.key,
-  // required this.onSignOut
   });
 
   @override
-  // ignore: no_logic_in_create_state
+  
   State<MainProfilePage> createState() => _MainProfilePageState(
-    // onLogOut: onSignOut
+    
     );
 }
 
 class _MainProfilePageState extends State<MainProfilePage> {
-  // final Function(User?) onLogOut;
-  // _MainProfilePageState({required this.onLogOut});
+ 
   
   bool onTapBankDetails = false;
   bool onTapCurrentJobStatus = false;
@@ -38,10 +35,6 @@ class _MainProfilePageState extends State<MainProfilePage> {
   bool isChecked4 = false;
   bool isChecked5 = false;
 
-  // Future<void> logOut() async{
-  //   await FirebaseAuth.instance.signOut();
-  //   onLogOut(null);
-  // }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -377,8 +370,10 @@ class _MainProfilePageState extends State<MainProfilePage> {
               height: Dimensions.height15,
             ),
             Button(
-              on_pressed: () {
-                // logOut();
+              on_pressed: () async{
+                await  FirebaseAuth.instance.signOut();
+                Navigator.of(context,rootNavigator: true)
+    .pushNamedAndRemoveUntil('/decision', (Route<dynamic> route) => false);
               },
               text: 'Log Out',
               width: Dimensions.width40 * 3.3,

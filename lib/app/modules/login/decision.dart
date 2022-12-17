@@ -13,24 +13,20 @@ class Decision extends StatefulWidget {
 }
 
 class _DecisionState extends State<Decision> {
-  User? user;
-  @override
-  void initState() {
-    super.initState();
-    onRefresh(FirebaseAuth.instance.currentUser);
-  }
-  onRefresh(userCred){
-    setState((){
-      user=userCred;
-    });
-  }
   @override
   Widget build(BuildContext context) {
-    if(user==null){
-      return const Login();
-    }
-    return TabBarWidget(
-      // onSignOut: (userCred)=>onRefresh(userCred),
+    return Scaffold(
+      body: StreamBuilder(
+        stream: FirebaseAuth.instance.authStateChanges(),
+        builder: (context, snapshot) => 
+        snapshot.hasData? const TabBarWidget(): const Login()
+      ),
     );
+    // if(user==null){
+    //   return const Login();
+    // }
+    // return TabBarWidget(
+    //   // onSignOut: (userCred)=>onRefresh(userCred),
+    // );
   }
 }
