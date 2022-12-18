@@ -17,10 +17,9 @@ class CreateProfileController {
       "panNumber": panNumber,
       "adahaarNumber": adahaarNumber,
     };
-
+    print(labourData);
     await db.collection('labours').add(labourData).then(
         (DocumentReference doc) =>
             print('DocumentSnapshot added with ID: ${doc.id}'));
-    print(labourData);
   }
 }

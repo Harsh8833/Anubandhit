@@ -1,5 +1,8 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:anubandhit/app/modules/login/view/login.dart';
+import 'package:anubandhit/helper/loading.dart';
+import 'package:anubandhit/helper/shared_preferences.dart';
 import 'package:anubandhit/widgets/big_text.dart';
 import 'package:anubandhit/widgets/button.dart';
 import 'package:anubandhit/widgets/timeline_tile.dart';
@@ -13,19 +16,15 @@ import '../../../../../utils/dimensions.dart';
 class MainProfilePage extends StatefulWidget {
   static launch(BuildContext context) =>
       Navigator.pushNamed(context, '/main-profile');
-  MainProfilePage({super.key,
+  MainProfilePage({
+    super.key,
   });
 
   @override
-  
-  State<MainProfilePage> createState() => _MainProfilePageState(
-    
-    );
+  State<MainProfilePage> createState() => _MainProfilePageState();
 }
 
 class _MainProfilePageState extends State<MainProfilePage> {
- 
-  
   bool onTapBankDetails = false;
   bool onTapCurrentJobStatus = false;
   bool onTapWorkHistory = false;
@@ -282,13 +281,37 @@ class _MainProfilePageState extends State<MainProfilePage> {
                                       BorderRadius.all(Radius.circular(10)),
                                   color: AppColors.white),
                               child: Padding(
-                                padding:  EdgeInsets.only(left: Dimensions.width20),
+                                padding:
+                                    EdgeInsets.only(left: Dimensions.width20),
                                 child: Column(children: [
-                                  TimeLineTileWidget(isCheckedValue: isChecked1, showEndConnector: true, timeLineText: 'Applied Successfully',),
-                                  TimeLineTileWidget(isCheckedValue: isChecked2, showStartConnector: true, showEndConnector: true, timeLineText: 'Job Accepted',),
-                                  TimeLineTileWidget(isCheckedValue: isChecked3, showStartConnector: true, showEndConnector: true, timeLineText: 'Working',),
-                                  TimeLineTileWidget(isCheckedValue: isChecked4, showStartConnector: true, showEndConnector: true, timeLineText: 'Job Done',) ,
-                                  TimeLineTileWidget(isCheckedValue: isChecked5, showStartConnector: true, timeLineText: 'Payment Recieved',),
+                                  TimeLineTileWidget(
+                                    isCheckedValue: isChecked1,
+                                    showEndConnector: true,
+                                    timeLineText: 'Applied Successfully',
+                                  ),
+                                  TimeLineTileWidget(
+                                    isCheckedValue: isChecked2,
+                                    showStartConnector: true,
+                                    showEndConnector: true,
+                                    timeLineText: 'Job Accepted',
+                                  ),
+                                  TimeLineTileWidget(
+                                    isCheckedValue: isChecked3,
+                                    showStartConnector: true,
+                                    showEndConnector: true,
+                                    timeLineText: 'Working',
+                                  ),
+                                  TimeLineTileWidget(
+                                    isCheckedValue: isChecked4,
+                                    showStartConnector: true,
+                                    showEndConnector: true,
+                                    timeLineText: 'Job Done',
+                                  ),
+                                  TimeLineTileWidget(
+                                    isCheckedValue: isChecked5,
+                                    showStartConnector: true,
+                                    timeLineText: 'Payment Recieved',
+                                  ),
                                 ]),
                               ),
                             )
@@ -370,10 +393,14 @@ class _MainProfilePageState extends State<MainProfilePage> {
               height: Dimensions.height15,
             ),
             Button(
-              on_pressed: () async{
-                await  FirebaseAuth.instance.signOut();
-                Navigator.of(context,rootNavigator: true)
-    .pushNamedAndRemoveUntil('/decision', (Route<dynamic> route) => false);
+              on_pressed: () async {
+                showLoading(context, "Logging out");
+                await FirebaseAuth.instance
+                    .signOut()
+                    .then((value) => SPController().setIsLoggedin(false));
+                Navigator.of(context, rootNavigator: true)
+                    .pushNamedAndRemoveUntil(
+                        Login.route, (Route<dynamic> route) => false);
               },
               text: 'Log Out',
               width: Dimensions.width40 * 3.3,

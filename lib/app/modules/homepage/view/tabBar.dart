@@ -1,11 +1,9 @@
 // ignore_for_file: file_names, prefer_const_constructors, avoid_unnecessary_containers, no_logic_in_create_state
 
 import 'package:anubandhit/app/modules/homepage/view/homepage.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
-
 import '../../../../utils/colors.dart';
 import '../../../../utils/dimensions.dart';
 import '../../profile/main_profile/view/main_profile.dart';
