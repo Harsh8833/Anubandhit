@@ -2,6 +2,7 @@ import 'package:anubandhit/app/modules/homepage/model/job_model.dart';
 import 'package:anubandhit/app/modules/homepage/view/job_card.dart';
 import 'package:anubandhit/utils/colors.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import '../../../../utils/dimensions.dart';
 import '../../../../widgets/big_text.dart';
@@ -14,6 +15,7 @@ class HomePage extends StatelessWidget {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   var db = FirebaseFirestore.instance.collection('/jobs');
+  final storage = FirebaseStorage.instance.ref();
 
   @override
   Widget build(BuildContext context) {
@@ -69,6 +71,7 @@ class HomePage extends StatelessWidget {
                     return Center(child: Text('Error: ${snapshot.error}'));
                   } else {
                     var data = snapshot.data!.docs;
+                    print(data[0]['company'].data);
                     return ListView.builder(
                         itemCount: data.length,
                         itemBuilder: (context, index) {
@@ -77,7 +80,9 @@ class HomePage extends StatelessWidget {
                                   data[index]["current_vacancy"],
                                   data[index]['duration'],
                                   data[index]['eligibility'],
-                                  'https://www.constructionexec.com/assets/site_18/images/article/081219110833.jpg?width=1280',
+                                  storage
+                                      .child('/jobs/unsplash_cfDURuQKABk.png')
+                                      .getDownloadURL(),
                                   data[index]['location'],
                                   data[index]['name'],
                                   data[index]['pay'],

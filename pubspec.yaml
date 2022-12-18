@@ -42,6 +42,8 @@ dependencies:
   firebase_core: ^2.4.0
   cloud_firestore: ^4.2.0
   shared_preferences: ^2.0.15
+  firebase_storage: ^11.0.8
+  shimmer: ^2.0.0
 
 dev_dependencies:
   flutter_lints: ^2.0.0

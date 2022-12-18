@@ -2,7 +2,7 @@ class JobModel {
   int current_vacancy;
   String duration;
   List<dynamic> eligibility;
-  String image;
+  Future<String> image;
   String location;
   String name;
   String pay;

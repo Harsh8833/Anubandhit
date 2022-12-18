@@ -1,4 +1,5 @@
 import 'package:anubandhit/app/modules/homepage/model/job_model.dart';
+import 'package:anubandhit/helper/shimmer.dart';
 import 'package:anubandhit/widgets/button.dart';
 import 'package:flutter/material.dart';
 
@@ -31,7 +32,25 @@ class JobCard extends StatelessWidget {
                   child: SizedBox(
                       width: double.maxFinite,
                       height: Dimensions.height40 * 5.25,
-                      child: Image.network(job.image, fit: BoxFit.fill))),
+                      child: FutureBuilder(
+                        future: job.image,
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return Center(
+                                child: CustomWidget.rectangular(
+                                    height: Dimensions.height40 * 5.25));
+                          } else {
+                            if (snapshot.hasError) {
+                              return Center(
+                                  child: Text('Error: ${snapshot.error}'));
+                            } else {
+                              return Image.network(snapshot.data ?? "",
+                                  fit: BoxFit.fitWidth);
+                            }
+                          }
+                        },
+                      ))),
               ClipRRect(
                   borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(Dimensions.radius20),
