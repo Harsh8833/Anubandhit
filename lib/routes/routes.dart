@@ -14,7 +14,6 @@ Map<String, Widget Function(BuildContext)> appRoutes() {
     Login.route: (context) => const Login(),
     Categories.route: (context) => const Categories(),
     CreateProfilePage.route: (context) => const CreateProfilePage(),
-    Decision.route: (context) => const Decision(),
     TabBarWidget.route: (context) => const TabBarWidget(),
   };
 }

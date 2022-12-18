@@ -18,10 +18,9 @@ class _DecisionState extends State<Decision> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: StreamBuilder(
-        stream: FirebaseAuth.instance.authStateChanges(),
-        builder: (context, snapshot) => 
-        snapshot.hasData? const TabBarWidget(): const Login()
-      ),
+          stream: FirebaseAuth.instance.authStateChanges(),
+          builder: (context, snapshot) =>
+              snapshot.hasData ? const TabBarWidget() : const Login()),
     );
     // if(user==null){
     //   return const Login();

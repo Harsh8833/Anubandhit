@@ -1,3 +1,5 @@
+import 'package:anubandhit/app/modules/login/view/login.dart';
+import 'package:anubandhit/app/modules/profile/create_profile/view/create_profile.dart';
 import 'package:anubandhit/routes/routes.dart';
 import 'package:flutter/material.dart';
 
@@ -14,7 +16,7 @@ class MyApp extends StatelessWidget {
       title: 'Anubandhit',
       theme: MyTheme.lightTheme(context),
       routes: appRoutes(),
-      initialRoute: '/decision',
+      initialRoute: Login.route,
     );
   }
 }

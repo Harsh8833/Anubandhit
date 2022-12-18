@@ -6,5 +6,5 @@ class MyTheme {
       primaryColor: AppColors.orange,
       fontFamily: 'RedHat',
       scaffoldBackgroundColor: AppColors.white,
-      colorScheme: const ColorScheme.light());
+      colorScheme: const ColorScheme.light(primary: AppColors.orange));
 }

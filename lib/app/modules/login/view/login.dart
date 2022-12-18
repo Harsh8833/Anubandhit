@@ -78,9 +78,6 @@ class _LoginState extends State<Login> {
                         height: Dimensions.height15,
                       ),
                       Button(on_pressed: ()async{
-                      /*setState(() {
-                        CircularProgressIndicator();
-                      });*/
                         await controller.onSendOtp(context);
                         
                       }, text: 'Send OTP',width: Dimensions.width40*8,

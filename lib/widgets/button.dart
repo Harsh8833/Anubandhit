@@ -33,7 +33,7 @@ class Button extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextButton(
+    return MaterialButton(
         onPressed: on_pressed,
         child: Container(
           width:width==0 ? Dimensions.screenWidth*0.6 : width,
