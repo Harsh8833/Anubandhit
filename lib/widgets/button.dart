@@ -2,7 +2,6 @@
 import 'package:anubandhit/widgets/small_text.dart';
 import 'package:flutter/material.dart';
 
-
 import '../utils/colors.dart';
 import '../utils/dimensions.dart';
 
@@ -19,33 +18,38 @@ class Button extends StatelessWidget {
   EdgeInsetsGeometry? margin;
   Button(
       {Key? key,
-      this.textSize=0,
+      this.textSize = 0,
       required this.on_pressed,
       required this.text,
-      this.radius=8,
+      this.radius = 8,
       this.boxBorder,
-      this.textColor=AppColors.white,
+      this.textColor = AppColors.white,
       this.margin,
-      this.width=0,
-      this.color=AppColors.orange,
-      this.height=0})
+      this.width = 0,
+      this.color = AppColors.orange,
+      this.height = 0})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return MaterialButton(
+    return TextButton(
         onPressed: on_pressed,
         child: Container(
-          width:width==0 ? Dimensions.screenWidth*0.6 : width,
-          height: height ==0 ? Dimensions.screenWidth*0.15 : height,
+          width: width == 0 ? Dimensions.screenWidth * 0.6 : width,
+          height: height == 0 ? Dimensions.screenWidth * 0.15 : height,
           margin: margin,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(radius!.toDouble())),
-            border: boxBorder,
-            color: color
-          ),
+              borderRadius:
+                  BorderRadius.all(Radius.circular(radius!.toDouble())),
+              border: boxBorder,
+              color: color),
           child: Center(
-            child: SmallText(text: text, size: textSize==0? Dimensions.font20 : textSize!, color: textColor, fontWeight: FontWeight.bold,),
+            child: SmallText(
+              text: text,
+              size: textSize == 0 ? Dimensions.font20 : textSize!,
+              color: textColor,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ));
   }

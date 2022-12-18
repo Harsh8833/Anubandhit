@@ -1,9 +1,15 @@
+import 'dart:developer';
+
 import 'package:anubandhit/app/modules/categories/view/categories.dart';
 import 'package:anubandhit/app/modules/homepage/view/homepage.dart';
+import 'package:anubandhit/helper/loading.dart';
+import 'package:anubandhit/helper/shared_preferences.dart';
+import 'package:anubandhit/helper/snackbar.dart';
 import 'package:anubandhit/widgets/big_text.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../utils/colors.dart';
 import '../../../../utils/dimensions.dart';
@@ -12,6 +18,7 @@ import '../../../../widgets/button.dart';
 class OtpScreen extends StatelessWidget {
   String verification;
   late String phoneOtp;
+  final spcontroller = SPController();
   OtpScreen({super.key, required this.verification});
 
   @override
@@ -86,15 +93,23 @@ class OtpScreen extends StatelessWidget {
                 Button(
                   on_pressed: () async {
                     try {
+                      showLoading(context, "please wait...");
                       PhoneAuthCredential credential =
                           PhoneAuthProvider.credential(
                               verificationId: verification, smsCode: phoneOtp);
-                      await FirebaseAuth.instance
+                      var userCredential = await FirebaseAuth.instance
                           .signInWithCredential(credential);
+                      if (userCredential.user?.uid != null) {
+                        spcontroller.setLabourId(userCredential.user!.uid);
+                        spcontroller.setIsLoggedin(true);
+                        Categories.launch(context);
+                      }
+                      
+
                       // ignore: use_build_context_synchronously
-                      Categories.launch(context);
+
                     } catch (e) {
-                      print(e);
+                      appSnackBar(context, e);
                     }
                   },
                   text: 'LogIn',

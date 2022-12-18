@@ -18,17 +18,14 @@ class LogInController {
     await FirebaseAuth.instance.verifyPhoneNumber(
       timeout: const Duration(seconds: 60),
       phoneNumber: '+91$phoneNumber',
-      verificationCompleted: (PhoneAuthCredential credential) async {
-        UserCredential userCredential =
-            await FirebaseAuth.instance.signInWithCredential(credential);
-        log(userCredential.user!.uid);
-      },
+      verificationCompleted: (PhoneAuthCredential credential) async {},
       verificationFailed: (FirebaseAuthException e) {
         // LoadingUtils.hideLoader();
         Navigator.pop(context);
         if (e.code == 'invalid-phone-number') {
           appSnackBar(context, 'The provided phone number is not valid.');
         }
+        appSnackBar(context, e.toString());
       },
       codeSent: (String verificationId, int? resendToken) {
         verification = verificationId;
