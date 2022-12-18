@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 import 'view/login.dart';
 
 class Decision extends StatefulWidget {
-  static launch(BuildContext context) => Navigator.of(context).pushNamed('/decision');
+  static const route = '/decision';
+  static launch(BuildContext context) => Navigator.of(context).pushNamed(route);
   const Decision({Key? key}) : super(key: key);
 
   @override

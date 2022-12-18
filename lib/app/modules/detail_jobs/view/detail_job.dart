@@ -7,8 +7,9 @@ import 'package:flutter/material.dart';
 import '../../../../utils/colors.dart';
 
 class DetailJob extends StatefulWidget {
+  static const route = '/detailJob';
   static launch(BuildContext context) =>
-      Navigator.of(context, rootNavigator: true).pushNamed("/detailJob");
+      Navigator.of(context, rootNavigator: true).pushNamed(route);
   const DetailJob({super.key});
 
   @override

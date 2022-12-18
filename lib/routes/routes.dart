@@ -7,14 +7,14 @@ import 'package:flutter/material.dart';
 import '../app/modules/detail_jobs/view/detail_job.dart';
 import '../app/modules/homepage/view/tabBar.dart';
 
-Map<String, Widget Function(BuildContext)> appRoutes(){
+Map<String, Widget Function(BuildContext)> appRoutes() {
   return {
-    '/homepage':(context)=>HomePage(),
-    '/detailJob':(context)=> const DetailJob(),
-    '/login':(context)=> const Login(),
-    '/categories':(context)=>const Categories(),
-    '/create-profile':(context)=> const CreateProfilePage(),
-    '/decision':(context)=>const Decision(),
-    '/tabbar':(context)=>const TabBarWidget(),    
+    HomePage.route: (context) => HomePage(),
+    DetailJob.route: (context) => const DetailJob(),
+    Login.route: (context) => const Login(),
+    Categories.route: (context) => const Categories(),
+    CreateProfilePage.route: (context) => const CreateProfilePage(),
+    Decision.route: (context) => const Decision(),
+    TabBarWidget.route: (context) => const TabBarWidget(),
   };
 }

@@ -6,6 +6,7 @@ import 'package:anubandhit/app/modules/homepage/view/tabBar.dart';
 import 'package:anubandhit/utils/colors.dart';
 import 'package:anubandhit/widgets/big_text.dart';
 import 'package:anubandhit/widgets/button.dart';
+import 'package:anubandhit/widgets/snackbar.dart';
 import 'package:anubandhit/widgets/text_field.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -14,8 +15,9 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import '../../../../../utils/dimensions.dart';
 
 class CreateProfilePage extends StatefulWidget {
+  static const route = '/create-profile';
   static launch(BuildContext context) =>
-      Navigator.pushNamed(context, '/create-profile');
+      Navigator.pushNamed(context, route);
   const CreateProfilePage({super.key});
 
   @override
@@ -279,12 +281,12 @@ class _CreateProfilePageState extends State<CreateProfilePage> {
             Button(
               on_pressed: () async {
                 if (nameController.text.isEmpty) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text("Please enter a valid Name")));
+                  appSnackBar(context, "Please enter your name");
                 } else if (phoneController.text.isEmpty) {
-                  log("phone");
+                  appSnackBar(context, "Please enter your phone");
+                } else if (addressController.text.isEmpty) {
+                  appSnackBar(context, "Please enter your address");
                 } else {
-                  log("else");
                   // Navigator.of(context).pushAndRemoveUntil(
                   //     MaterialPageRoute(builder: (context) => TabBarWidget()),
                   //     (Route route) => false);

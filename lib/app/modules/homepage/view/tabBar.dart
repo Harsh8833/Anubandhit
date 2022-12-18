@@ -11,20 +11,18 @@ import '../../../../utils/dimensions.dart';
 import '../../profile/main_profile/view/main_profile.dart';
 
 class TabBarWidget extends StatefulWidget {
-  static launch(BuildContext context) => Navigator.of(context).pushNamed('/tabbar');
-  
-  const TabBarWidget({super.key,
-  
+  static const route = '/tabbar';
+  static launch(BuildContext context) => Navigator.of(context).pushNamed(route);
+
+  const TabBarWidget({
+    super.key,
   });
 
   @override
-  State<TabBarWidget> createState() => _TabBarWidgetState(
-     
-      );
+  State<TabBarWidget> createState() => _TabBarWidgetState();
 }
 
 class _TabBarWidgetState extends State<TabBarWidget> {
-  
   late PersistentTabController _controller;
   @override
   void initState() {
@@ -37,9 +35,7 @@ class _TabBarWidgetState extends State<TabBarWidget> {
     return [
       HomePage(),
       Container(),
-      MainProfilePage(
-        
-      ),
+      MainProfilePage(),
     ];
   }
 

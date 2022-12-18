@@ -4,21 +4,22 @@ import '../../../../utils/dimensions.dart';
 import '../../../../widgets/big_text.dart';
 
 class HomePage extends StatelessWidget {
-  static launch(BuildContext context) => Navigator.of(context).pushNamed('/');
-HomePage({super.key});
+  static const route = '/';
+  static launch(BuildContext context) => Navigator.of(context).pushNamed(route);
+  HomePage({super.key});
 
-  
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-          key: _scaffoldKey,
-          drawer: const Drawer(),
+      key: _scaffoldKey,
+      drawer: const Drawer(),
       body: Column(children: [
         Expanded(
             child: Padding(
-                padding:  EdgeInsets.fromLTRB(Dimensions.width20, 0, Dimensions.width20, Dimensions.height10),
+                padding: EdgeInsets.fromLTRB(Dimensions.width20, 0,
+                    Dimensions.width20, Dimensions.height10),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -42,8 +43,8 @@ HomePage({super.key});
                       ],
                     ),
                     BigText(
-                    text: 'Job Opening',
-                      size: Dimensions.font26*1.23,
+                      text: 'Job Opening',
+                      size: Dimensions.font26 * 1.23,
                       fontWeight: FontWeight.bold,
                     ),
                   ],

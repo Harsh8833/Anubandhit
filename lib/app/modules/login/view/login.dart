@@ -6,7 +6,8 @@ import '../../../../utils/colors.dart';
 import '../../../../utils/dimensions.dart';
 
 class Login extends StatefulWidget {
-  static launch(BuildContext context) => Navigator.of(context).pushNamed('/login');
+  static const route = '/login';
+  static launch(BuildContext context) => Navigator.of(context).pushNamed(route);
   const Login({super.key});
 
   @override

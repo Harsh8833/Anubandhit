@@ -8,7 +8,8 @@ import '../../../../utils/colors.dart';
 import '../../../../widgets/big_text.dart';
 
 class Categories extends StatefulWidget {
-  static launch(BuildContext context) => Navigator.of(context).pushNamed('/categories');
+  static const route = '/categories';
+  static launch(BuildContext context) => Navigator.of(context).pushNamed(route);
   const Categories({super.key});
 
   @override
