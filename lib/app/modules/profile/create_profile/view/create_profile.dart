@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:anubandhit/app/modules/homepage/view/homepage.dart';
+import 'dart:developer';
+
 import 'package:anubandhit/app/modules/homepage/view/tabBar.dart';
 import 'package:anubandhit/utils/colors.dart';
 import 'package:anubandhit/widgets/big_text.dart';
@@ -11,7 +12,6 @@ import 'package:flutter/material.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 
 import '../../../../../utils/dimensions.dart';
-
 
 class CreateProfilePage extends StatefulWidget {
   static launch(BuildContext context) =>
@@ -25,14 +25,26 @@ class CreateProfilePage extends StatefulWidget {
 class _CreateProfilePageState extends State<CreateProfilePage> {
   final List<String> bankList = ['HDFC', 'ICICI', 'SBI', 'Swiss Bank'];
   String? selectedValue;
-  final TextEditingController textEditingController = TextEditingController();
-
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController phoneController = TextEditingController();
+  final TextEditingController addressController = TextEditingController();
+  final TextEditingController panNumberController = TextEditingController();
+  final TextEditingController adahaarNumberController = TextEditingController();
+  final TextEditingController bankNameController = TextEditingController();
   @override
   void dispose() {
-    textEditingController.dispose();
+    nameController.dispose();
+    phoneController.dispose();
+    addressController.dispose();
+    panNumberController.dispose();
+    adahaarNumberController.dispose();
+    bankNameController.dispose();
     super.dispose();
   }
-  final Function(User?) x=(User){FirebaseAuth.instance.currentUser;};
+
+  final Function(User?) x = (User) {
+    FirebaseAuth.instance.currentUser;
+  };
 
   @override
   Widget build(BuildContext context) {
@@ -224,7 +236,7 @@ class _CreateProfilePageState extends State<CreateProfilePage> {
                       buttonWidth: Dimensions.width40 * 5,
                       itemHeight: Dimensions.height40,
                       dropdownMaxHeight: Dimensions.height40 * 5,
-                      searchController: textEditingController,
+                      searchController: bankNameController,
                       searchInnerWidget: Padding(
                         padding: EdgeInsets.only(
                           top: Dimensions.height40 / 5,
@@ -233,7 +245,7 @@ class _CreateProfilePageState extends State<CreateProfilePage> {
                           left: Dimensions.height40 / 5,
                         ),
                         child: TextFormField(
-                          controller: textEditingController,
+                          controller: bankNameController,
                           decoration: InputDecoration(
                             isDense: true,
                             contentPadding: EdgeInsets.symmetric(
@@ -256,7 +268,7 @@ class _CreateProfilePageState extends State<CreateProfilePage> {
                       //This to clear the search value when you close the menu
                       onMenuStateChange: (isOpen) {
                         if (!isOpen) {
-                          textEditingController.clear();
+                          bankNameController.clear();
                         }
                       },
                     ),
@@ -265,13 +277,21 @@ class _CreateProfilePageState extends State<CreateProfilePage> {
               ),
             ),
             Button(
-              on_pressed: () {
-                Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(
-builder: (context) => TabBarWidget()), (Route route) => false);
+              on_pressed: () async {
+                if (nameController.text.isEmpty) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text("Please enter a valid Name")));
+                } else if (phoneController.text.isEmpty) {
+                  log("phone");
+                } else {
+                  log("else");
+                  // Navigator.of(context).pushAndRemoveUntil(
+                  //     MaterialPageRoute(builder: (context) => TabBarWidget()),
+                  //     (Route route) => false);
+                }
               },
               text: 'Continue',
               width: Dimensions.screenWidth * 0.8,
-              
             )
           ]),
         ),

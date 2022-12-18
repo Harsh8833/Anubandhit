@@ -1,7 +1,6 @@
 import 'package:anubandhit/routes/routes.dart';
 import 'package:flutter/material.dart';
 
-
 import '../utils/theme.dart';
 
 class MyApp extends StatelessWidget {
@@ -12,7 +11,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'Anubandhit',
       theme: MyTheme.lightTheme(context),
       routes: appRoutes(),
       initialRoute: '/decision',
