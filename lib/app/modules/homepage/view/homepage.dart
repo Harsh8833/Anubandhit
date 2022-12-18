@@ -71,7 +71,7 @@ class HomePage extends StatelessWidget {
                     return Center(child: Text('Error: ${snapshot.error}'));
                   } else {
                     var data = snapshot.data!.docs;
-                    print(data[0]['company'].data);
+                    print(data[0]['company']);
                     return ListView.builder(
                         itemCount: data.length,
                         itemBuilder: (context, index) {
