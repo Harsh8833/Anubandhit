@@ -1,6 +1,8 @@
 import 'package:anubandhit/app/modules/homepage/model/job_model.dart';
 import 'package:anubandhit/helper/shimmer.dart';
 import 'package:anubandhit/widgets/button.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../utils/colors.dart';
@@ -161,10 +163,35 @@ class JobCard extends StatelessWidget {
                                           color: AppColors.orange,
                                           size: Dimensions.font15,
                                           fontWeight: FontWeight.bold),
-                                      BigText(
-                                        text: job.company_name,
-                                        color: AppColors.grey,
-                                        size: Dimensions.font15,
+                                      FutureBuilder(
+                                        future: FirebaseFirestore.instance
+                                            .collection('companies')
+                                            .where('company_id',
+                                                isEqualTo: job.company)
+                                            .get(),
+                                        builder: (context, snapshot) {
+                                          if (snapshot.connectionState ==
+                                              ConnectionState.waiting) {
+                                            return BigText(
+                                              text: "Loading...",
+                                              color: AppColors.grey,
+                                              size: Dimensions.font15,
+                                            );
+                                          } else {
+                                            if (snapshot.hasError) {
+                                              return Text(
+                                                  'Error: ${snapshot.error}');
+                                            } else {
+                                              return BigText(
+                                                text:
+                                                    '${snapshot.data?.docs[0]['name']}',
+                                                color: AppColors.grey,
+                                                size: Dimensions.font15,
+                                              );
+                                              // snapshot.data  :- get your object which is pass from your downloadData() function
+                                            }
+                                          }
+                                        },
                                       )
                                     ],
                                   ),
@@ -202,7 +229,7 @@ class JobCard extends StatelessWidget {
                             Expanded(
                                 child: Button(
                                     on_pressed: () {
-                                      DetailJob.launch(context);
+                                      DetailJob.launch(context, job);
                                     },
                                     text: 'Detail',
                                     boxBorder:

@@ -1,24 +1,27 @@
+import 'package:anubandhit/app/modules/homepage/model/job_model.dart';
 import 'package:anubandhit/utils/dimensions.dart';
 import 'package:anubandhit/widgets/big_text.dart';
 import 'package:anubandhit/widgets/button.dart';
 import 'package:anubandhit/widgets/key_value_text.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../utils/colors.dart';
 
-class DetailJob extends StatefulWidget {
+class DetailJob extends StatelessWidget {
   static const route = '/detailJob';
-  static launch(BuildContext context) =>
-      Navigator.of(context, rootNavigator: true).pushNamed(route);
-  const DetailJob({super.key});
-
-  @override
-  State<DetailJob> createState() => _DetailJobState();
-}
-
-class _DetailJobState extends State<DetailJob> {
+  static launch(BuildContext context, JobModel job) =>
+      Navigator.of(context, rootNavigator: true)
+          .pushNamed(route, arguments: job);
+  DetailJob({super.key});
+  String eligiblity = "";
   @override
   Widget build(BuildContext context) {
+    final job = ModalRoute.of(context)!.settings.arguments as JobModel;
+    job.eligibility.forEach((element) {
+      eligiblity = "$eligiblity$element\n";
+    });
+
     return Scaffold(
       body: SafeArea(
           child: Padding(
@@ -66,11 +69,25 @@ class _DetailJobState extends State<DetailJob> {
                   borderRadius: BorderRadius.circular(Dimensions.radius20),
                 ),
                 child: ClipRRect(
-                  borderRadius: BorderRadius.circular(Dimensions.radius20),
-                  child: Image.network(
-                      'https://www.constructionexec.com/assets/site_18/images/article/081219110833.jpg?width=1280',
-                      fit: BoxFit.fill),
-                ),
+                    borderRadius: BorderRadius.circular(Dimensions.radius20),
+                    child: FutureBuilder(
+                      future: job.image,
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return const Center(
+                              child: CircularProgressIndicator());
+                        } else {
+                          if (!snapshot.hasData) {
+                            return Center(
+                                child: Text('Error: ${snapshot.error}'));
+                          } else {
+                            return Image.network(snapshot.data ?? "",
+                                fit: BoxFit.fitWidth);
+                          }
+                        }
+                      },
+                    )),
               ),
             )),
             Expanded(
@@ -80,7 +97,7 @@ class _DetailJobState extends State<DetailJob> {
                   child: Column(
                     children: [
                       BigText(
-                        text: 'Construction XYZ',
+                        text: job.name,
                         fontWeight: FontWeight.bold,
                         size: Dimensions.font26,
                       ),
@@ -96,12 +113,12 @@ class _DetailJobState extends State<DetailJob> {
                             fontWeight: FontWeight.bold,
                           ),
                           BigText(
-                            text: '120',
+                            text: job.current_vacancy.toString(),
                             size: Dimensions.font15,
                             color: AppColors.orange,
                           ),
                           BigText(
-                            text: '/200',
+                            text: '/${job.total_vacancy.toString()}',
                             size: Dimensions.font15,
                           ),
                         ],
@@ -112,7 +129,7 @@ class _DetailJobState extends State<DetailJob> {
                       Align(
                           alignment: Alignment.centerLeft,
                           child: BigText(
-                              text: 'Construction Worker',
+                              text: job.type,
                               fontWeight: FontWeight.bold,
                               size: Dimensions.font26 * 0.8)),
                       SizedBox(
@@ -121,53 +138,76 @@ class _DetailJobState extends State<DetailJob> {
                       KeyValueText(
                           icon: Icons.language_outlined,
                           keyText: ' Location :  ',
-                          value:
-                              'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'),
+                          value: job.location),
                       SizedBox(
                         height: Dimensions.height15,
                       ),
                       KeyValueText(
                           icon: Icons.calendar_month_outlined,
                           keyText: ' Duration :  ',
-                          value: '3 months'),
+                          value: job.duration),
                       SizedBox(
                         height: Dimensions.height15,
                       ),
                       KeyValueText(
                           icon: Icons.paid_outlined,
                           keyText: ' Pay :  ',
-                          value: '₹650/day'),
+                          value: '₹${job.pay}'),
                       SizedBox(
                         height: Dimensions.height15,
                       ),
-                      KeyValueText(
-                          icon: Icons.lock,
-                          keyText: ' Company :  ',
-                          value: 'XYZ Steel pvt. ltd'),
+                      FutureBuilder(
+                        future: FirebaseFirestore.instance
+                            .collection('companies')
+                            .where('company_id', isEqualTo: job.company)
+                            .get(),
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return BigText(
+                              text: "Loading...",
+                              color: AppColors.grey,
+                              size: Dimensions.font15,
+                            );
+                          } else {
+                            if (snapshot.hasError) {
+                              return Text('Error: ${snapshot.error}');
+                            } else {
+                              return KeyValueText(
+                                  icon: Icons.lock,
+                                  keyText: ' Company :  ',
+                                  value: snapshot.data!.docs[0]['name']);
+                              // snapshot.data  :- get your object which is pass from your downloadData() function
+                            }
+                          }
+                        },
+                      ),
                       SizedBox(
                         height: Dimensions.height15,
                       ),
                       KeyValueText(
                           icon: Icons.checklist_outlined,
                           keyText: ' Eligibility :  ',
-                          value: 'Physically fit individual for manual work.'),
+                          value: eligiblity),
                       SizedBox(
                         height: Dimensions.height15,
                       ),
-                      Row(
-                        children: [
-                          const Icon(
-                            Icons.check_circle_outline_outlined,
-                            color: AppColors.deepGreen,
-                          ),
-                          BigText(
-                            text: 'Payment Verified',
-                            size: Dimensions.font20 * .7,
-                            color: AppColors.deepGreen,
-                            fontWeight: FontWeight.bold,
-                          )
-                        ],
-                      ),
+                      (job.payment_verified)
+                          ? Row(
+                              children: [
+                                const Icon(
+                                  Icons.check_circle_outline_outlined,
+                                  color: AppColors.deepGreen,
+                                ),
+                                BigText(
+                                  text: 'Payment Verified',
+                                  size: Dimensions.font20 * .7,
+                                  color: AppColors.deepGreen,
+                                  fontWeight: FontWeight.bold,
+                                )
+                              ],
+                            )
+                          : const SizedBox(),
                       SizedBox(
                         height: Dimensions.height15,
                       ),

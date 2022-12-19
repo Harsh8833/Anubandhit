@@ -6,7 +6,9 @@ import 'package:anubandhit/helper/loading.dart';
 import 'package:anubandhit/helper/shared_preferences.dart';
 import 'package:anubandhit/helper/snackbar.dart';
 import 'package:anubandhit/widgets/big_text.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -102,14 +104,25 @@ class OtpScreen extends StatelessWidget {
                       if (userCredential.user?.uid != null) {
                         spcontroller.setLabourId(userCredential.user!.uid);
                         spcontroller.setIsLoggedin(true);
-                        Categories.launch(context);
+                        var existingLabour = FirebaseFirestore.instance
+                            .collection('labours')
+                            .where('labour_id',
+                                isEqualTo: userCredential.user!.uid)
+                            .get()
+                            .then(
+                          (res) {
+                            print("Existing Labours");
+                            HomePage.launch(context);
+                          },
+                          onError: (e) => Categories.launch(context),
+                        );
                       }
-                      
 
                       // ignore: use_build_context_synchronously
 
                     } catch (e) {
-                      appSnackBar(context, e);
+                      print(e);
+                      appSnackBar(context, e.toString());
                     }
                   },
                   text: 'LogIn',

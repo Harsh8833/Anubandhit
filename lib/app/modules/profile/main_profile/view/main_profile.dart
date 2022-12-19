@@ -3,9 +3,11 @@
 import 'package:anubandhit/app/modules/login/view/login.dart';
 import 'package:anubandhit/helper/loading.dart';
 import 'package:anubandhit/helper/shared_preferences.dart';
+import 'package:anubandhit/helper/shimmer.dart';
 import 'package:anubandhit/widgets/big_text.dart';
 import 'package:anubandhit/widgets/button.dart';
 import 'package:anubandhit/widgets/timeline_tile.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:timelines/timelines.dart';
@@ -33,6 +35,7 @@ class _MainProfilePageState extends State<MainProfilePage> {
   bool isChecked3 = false;
   bool isChecked4 = false;
   bool isChecked5 = false;
+  FirebaseFirestore db = FirebaseFirestore.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -68,34 +71,63 @@ class _MainProfilePageState extends State<MainProfilePage> {
             SizedBox(
               height: Dimensions.height10 / 2,
             ),
-            SizedBox(
-              child: Column(
-                children: [
-                  CircleAvatar(
-                    radius: Dimensions.radius30 * 1.5,
-                    backgroundImage: NetworkImage(
-                        'https://blog.readyplayer.me/content/images/2021/04/IMG_0689.PNG'),
-                  ),
-                  BigText(
-                    text: 'User name',
-                    fontWeight: FontWeight.bold,
-                  ),
-                  SizedBox(
-                    height: Dimensions.height10,
-                  ),
-                  BigText(
-                    text: 'Address',
-                    size: Dimensions.font15,
-                  ),
-                  SizedBox(
-                    height: Dimensions.height10,
-                  ),
-                  BigText(
-                    text: 'Phone Number',
-                    size: Dimensions.font15,
-                  ),
-                ],
-              ),
+            FutureBuilder(
+              future: db
+                  .collection('labours')
+                  .where('labour_id', isEqualTo: SPController().getLabourId())
+                  .get(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Center(
+                      child: Column(
+                    children: [
+                      CustomWidget.circular(height: Dimensions.radius30 * 3),
+                      SizedBox(
+                        height: 12,
+                      ),
+                      SizedBox(
+                          width: Dimensions.screenWidth * 0.6,
+                          child: CustomWidget.rectangular(
+                              height: Dimensions.font20))
+                    ],
+                  ));
+                } else {
+                  if (snapshot.hasError) {
+                    return Center(child: Text('Error: ${snapshot.error}'));
+                  } else {
+                    var data = snapshot.data!.docs[0];
+                    return SizedBox(
+                      child: Column(
+                        children: [
+                          CircleAvatar(
+                            radius: Dimensions.radius30 * 1.5,
+                            backgroundImage: NetworkImage(
+                                'https://blog.readyplayer.me/content/images/2021/04/IMG_0689.PNG'),
+                          ),
+                          BigText(
+                            text: data['name'],
+                            fontWeight: FontWeight.bold,
+                          ),
+                          SizedBox(
+                            height: Dimensions.height10,
+                          ),
+                          BigText(
+                            text: data['address'],
+                            size: Dimensions.font15,
+                          ),
+                          SizedBox(
+                            height: Dimensions.height10,
+                          ),
+                          BigText(
+                            text: data['phone'],
+                            size: Dimensions.font15,
+                          ),
+                        ],
+                      ),
+                    );
+                  }
+                }
+              },
             ),
             SizedBox(
               height: Dimensions.height15,

@@ -14,7 +14,7 @@ class HomePage extends StatelessWidget {
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
-  var db = FirebaseFirestore.instance.collection('/jobs');
+  var db = FirebaseFirestore.instance;
   final storage = FirebaseStorage.instance.ref();
 
   @override
@@ -60,7 +60,7 @@ class HomePage extends StatelessWidget {
         Expanded(
             flex: 5,
             child: FutureBuilder(
-              future: db.get(),
+              future: db.collection('/jobs').get(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const Center(
@@ -71,7 +71,7 @@ class HomePage extends StatelessWidget {
                     return Center(child: Text('Error: ${snapshot.error}'));
                   } else {
                     var data = snapshot.data!.docs;
-                    print(data[0]['company']);
+
                     return ListView.builder(
                         itemCount: data.length,
                         itemBuilder: (context, index) {
@@ -88,9 +88,9 @@ class HomePage extends StatelessWidget {
                                   data[index]['pay'],
                                   data[index]['payment_verified'],
                                   data[index]['start_date'],
-                                  data[index]['total_vacancy'],
+                                  data[index]['current_vacancy'],
                                   data[index]['type'],
-                                  ''));
+                                  data[index]['company_id']));
                         });
                   } // snapshot.data  :- get your object which is pass from your downloadData() function
                 }

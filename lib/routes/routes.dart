@@ -10,7 +10,7 @@ import '../app/modules/homepage/view/tabBar.dart';
 Map<String, Widget Function(BuildContext)> appRoutes() {
   return {
     HomePage.route: (context) => HomePage(),
-    DetailJob.route: (context) => const DetailJob(),
+    DetailJob.route: (context) => DetailJob(),
     Login.route: (context) => const Login(),
     Categories.route: (context) => const Categories(),
     CreateProfilePage.route: (context) => const CreateProfilePage(),
