@@ -75,23 +75,24 @@ class HomePage extends StatelessWidget {
                     return ListView.builder(
                         itemCount: data.length,
                         itemBuilder: (context, index) {
-                          return JobCard(
-                              job: JobModel(
-                                  data[index]["current_vacancy"] ?? "200",
-                                  data[index]['duration'] ?? "3 months",
-                                  data[index]['eligibility'] ??
-                                      ["they have to work hard"],
-                                  storage
-                                      .child('/jobs/unsplash_cfDURuQKABk.png')
-                                      .getDownloadURL(),
-                                  data[index]['location'] ?? "",
-                                  data[index]['name'] ?? "",
-                                  data[index]['pay'] ?? "",
-                                  data[index]['payment_verified'] ?? "",
-                                  data[index]['start_date'] ?? "",
-                                  data[index]['current_vacancy'] ?? '',
-                                  data[index]['type'] ?? "",
-                                  data[index]['company_id']));
+                          return Text(data[index]['name'].toString());
+                          // return JobCard(
+                          //     job: JobModel(
+                          //         data[index]["current_vacancy"] ?? "200",
+                          //         data[index]['duration'] ?? "3 months",
+                          //         data[index]['eligibility'] ??
+                          //             ["they have to work hard"],
+                          //         storage
+                          //             .child('/jobs/unsplash_cfDURuQKABk.png')
+                          //             .getDownloadURL(),
+                          //         data[index]['location'] ?? "",
+                          //         data[index]['name'] ?? "",
+                          //         data[index]['pay'] ?? "",
+                          //         data[index]['payment_verified'] ?? "",
+                          //         data[index]['start_date'] ?? "",
+                          //         data[index]['current_vacancy'] ?? '',
+                          //         data[index]['type'] ?? "",
+                          //         data[index]['company_id']));
                         });
                   } // snapshot.data  :- get your object which is pass from your downloadData() function
                 }

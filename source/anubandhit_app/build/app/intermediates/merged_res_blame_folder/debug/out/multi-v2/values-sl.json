@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "/home/harsh/projects/Anubandhit/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-sl/values-sl.xml",
+            "outputFile": "/home/harsh/projects/Anubandhit/source/anubandhit_app/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-sl/values-sl.xml",
             "map": [
                 {
                     "source": "/home/harsh/.gradle/caches/transforms-3/33bff2b79f5a68c988cfc0a545303581/transformed/browser-1.4.0/res/values-sl/values-sl.xml",

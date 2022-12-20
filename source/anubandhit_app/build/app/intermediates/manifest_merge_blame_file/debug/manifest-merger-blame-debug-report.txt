@@ -13,8 +13,8 @@
 13         to allow setting breakpoints, to provide hot reload, etc.
 14    -->
 15    <uses-permission android:name="android.permission.INTERNET" />
-15-->/home/harsh/projects/Anubandhit/android/app/src/debug/AndroidManifest.xml:7:5-66
-15-->/home/harsh/projects/Anubandhit/android/app/src/debug/AndroidManifest.xml:7:22-64
+15-->/home/harsh/projects/Anubandhit/source/anubandhit_app/android/app/src/debug/AndroidManifest.xml:7:5-66
+15-->/home/harsh/projects/Anubandhit/source/anubandhit_app/android/app/src/debug/AndroidManifest.xml:7:22-64
 16    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 16-->[com.google.firebase:firebase-auth:21.1.0] /home/harsh/.gradle/caches/transforms-3/c5507de3d5737ba3e8c0fc407716fbc5/transformed/jetified-firebase-auth-21.1.0/AndroidManifest.xml:24:5-79
 16-->[com.google.firebase:firebase-auth:21.1.0] /home/harsh/.gradle/caches/transforms-3/c5507de3d5737ba3e8c0fc407716fbc5/transformed/jetified-firebase-auth-21.1.0/AndroidManifest.xml:24:22-76
@@ -69,37 +69,37 @@
 58            android:value="2" />
 59
 60        <service
-60-->[:firebase_auth] /home/harsh/projects/Anubandhit/build/firebase_auth/intermediates/merged_manifest/debug/AndroidManifest.xml:10:9-14:19
+60-->[:firebase_auth] /home/harsh/projects/Anubandhit/source/anubandhit_app/build/firebase_auth/intermediates/merged_manifest/debug/AndroidManifest.xml:10:9-14:19
 61            android:name="com.google.firebase.components.ComponentDiscoveryService"
-61-->[:firebase_auth] /home/harsh/projects/Anubandhit/build/firebase_auth/intermediates/merged_manifest/debug/AndroidManifest.xml:10:18-89
+61-->[:firebase_auth] /home/harsh/projects/Anubandhit/source/anubandhit_app/build/firebase_auth/intermediates/merged_manifest/debug/AndroidManifest.xml:10:18-89
 62            android:directBootAware="true"
 62-->[com.google.firebase:firebase-common:20.2.0] /home/harsh/.gradle/caches/transforms-3/5bcf3444d33f14960f1cb01da1ed360f/transformed/jetified-firebase-common-20.2.0/AndroidManifest.xml:34:13-43
 63            android:exported="false" >
 63-->[com.google.firebase:firebase-auth:21.1.0] /home/harsh/.gradle/caches/transforms-3/c5507de3d5737ba3e8c0fc407716fbc5/transformed/jetified-firebase-auth-21.1.0/AndroidManifest.xml:66:13-37
 64            <meta-data
-64-->[:firebase_auth] /home/harsh/projects/Anubandhit/build/firebase_auth/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-13:85
+64-->[:firebase_auth] /home/harsh/projects/Anubandhit/source/anubandhit_app/build/firebase_auth/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-13:85
 65                android:name="com.google.firebase.components:io.flutter.plugins.firebase.auth.FlutterFirebaseAuthRegistrar"
-65-->[:firebase_auth] /home/harsh/projects/Anubandhit/build/firebase_auth/intermediates/merged_manifest/debug/AndroidManifest.xml:12:17-124
+65-->[:firebase_auth] /home/harsh/projects/Anubandhit/source/anubandhit_app/build/firebase_auth/intermediates/merged_manifest/debug/AndroidManifest.xml:12:17-124
 66                android:value="com.google.firebase.components.ComponentRegistrar" />
-66-->[:firebase_auth] /home/harsh/projects/Anubandhit/build/firebase_auth/intermediates/merged_manifest/debug/AndroidManifest.xml:13:17-82
+66-->[:firebase_auth] /home/harsh/projects/Anubandhit/source/anubandhit_app/build/firebase_auth/intermediates/merged_manifest/debug/AndroidManifest.xml:13:17-82
 67            <meta-data
-67-->[:firebase_storage] /home/harsh/projects/Anubandhit/build/firebase_storage/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-13:85
+67-->[:firebase_storage] /home/harsh/projects/Anubandhit/source/anubandhit_app/build/firebase_storage/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-13:85
 68                android:name="com.google.firebase.components:io.flutter.plugins.firebase.storage.FlutterFirebaseAppRegistrar"
-68-->[:firebase_storage] /home/harsh/projects/Anubandhit/build/firebase_storage/intermediates/merged_manifest/debug/AndroidManifest.xml:12:17-126
+68-->[:firebase_storage] /home/harsh/projects/Anubandhit/source/anubandhit_app/build/firebase_storage/intermediates/merged_manifest/debug/AndroidManifest.xml:12:17-126
 69                android:value="com.google.firebase.components.ComponentRegistrar" />
-69-->[:firebase_storage] /home/harsh/projects/Anubandhit/build/firebase_storage/intermediates/merged_manifest/debug/AndroidManifest.xml:13:17-82
+69-->[:firebase_storage] /home/harsh/projects/Anubandhit/source/anubandhit_app/build/firebase_storage/intermediates/merged_manifest/debug/AndroidManifest.xml:13:17-82
 70            <meta-data
-70-->[:cloud_firestore] /home/harsh/projects/Anubandhit/build/cloud_firestore/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-13:85
+70-->[:cloud_firestore] /home/harsh/projects/Anubandhit/source/anubandhit_app/build/cloud_firestore/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-13:85
 71                android:name="com.google.firebase.components:io.flutter.plugins.firebase.firestore.FlutterFirebaseFirestoreRegistrar"
-71-->[:cloud_firestore] /home/harsh/projects/Anubandhit/build/cloud_firestore/intermediates/merged_manifest/debug/AndroidManifest.xml:12:17-134
+71-->[:cloud_firestore] /home/harsh/projects/Anubandhit/source/anubandhit_app/build/cloud_firestore/intermediates/merged_manifest/debug/AndroidManifest.xml:12:17-134
 72                android:value="com.google.firebase.components.ComponentRegistrar" />
-72-->[:cloud_firestore] /home/harsh/projects/Anubandhit/build/cloud_firestore/intermediates/merged_manifest/debug/AndroidManifest.xml:13:17-82
+72-->[:cloud_firestore] /home/harsh/projects/Anubandhit/source/anubandhit_app/build/cloud_firestore/intermediates/merged_manifest/debug/AndroidManifest.xml:13:17-82
 73            <meta-data
-73-->[:firebase_core] /home/harsh/projects/Anubandhit/build/firebase_core/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-13:85
+73-->[:firebase_core] /home/harsh/projects/Anubandhit/source/anubandhit_app/build/firebase_core/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-13:85
 74                android:name="com.google.firebase.components:io.flutter.plugins.firebase.core.FlutterFirebaseCoreRegistrar"
-74-->[:firebase_core] /home/harsh/projects/Anubandhit/build/firebase_core/intermediates/merged_manifest/debug/AndroidManifest.xml:12:17-124
+74-->[:firebase_core] /home/harsh/projects/Anubandhit/source/anubandhit_app/build/firebase_core/intermediates/merged_manifest/debug/AndroidManifest.xml:12:17-124
 75                android:value="com.google.firebase.components.ComponentRegistrar" />
-75-->[:firebase_core] /home/harsh/projects/Anubandhit/build/firebase_core/intermediates/merged_manifest/debug/AndroidManifest.xml:13:17-82
+75-->[:firebase_core] /home/harsh/projects/Anubandhit/source/anubandhit_app/build/firebase_core/intermediates/merged_manifest/debug/AndroidManifest.xml:13:17-82
 76            <meta-data
 76-->[com.google.firebase:firebase-auth:21.1.0] /home/harsh/.gradle/caches/transforms-3/c5507de3d5737ba3e8c0fc407716fbc5/transformed/jetified-firebase-auth-21.1.0/AndroidManifest.xml:67:13-69:85
 77                android:name="com.google.firebase.components:com.google.firebase.auth.FirebaseAuthRegistrar"

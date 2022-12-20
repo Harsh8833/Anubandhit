@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "/home/harsh/projects/Anubandhit/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-fr/values-fr.xml",
+            "outputFile": "/home/harsh/projects/Anubandhit/source/anubandhit_app/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-fr/values-fr.xml",
             "map": [
                 {
                     "source": "/home/harsh/.gradle/caches/transforms-3/df1ef28bbcf1d61ed33c6e37eec9bc90/transformed/jetified-play-services-basement-18.1.0/res/values-fr/values.xml",
