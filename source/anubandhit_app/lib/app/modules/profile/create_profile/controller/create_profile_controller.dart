@@ -16,6 +16,7 @@ class CreateProfileController {
       "address": address,
       "panNumber": panNumber,
       "adahaarNumber": adahaarNumber,
+      "workHistory": []
     };
     print(labourData);
     await db.collection('labours').add(labourData).then(

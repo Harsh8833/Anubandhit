@@ -9,6 +9,7 @@ import 'package:anubandhit/widgets/button.dart';
 import 'package:anubandhit/widgets/timeline_tile.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import '../../../../../utils/colors.dart';
 import '../../../../../utils/dimensions.dart';
@@ -34,7 +35,7 @@ class _MainProfilePageState extends State<MainProfilePage> {
   bool isChecked4 = false;
   bool isChecked5 = false;
   FirebaseFirestore db = FirebaseFirestore.instance;
-
+  var labour_id = SPController().getLabourId();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -405,12 +406,63 @@ class _MainProfilePageState extends State<MainProfilePage> {
                       onTapWorkHistory
                           ? Container(
                               width: double.maxFinite,
-                              height: Dimensions.height40 * 5.5,
+                              height: Dimensions.height40 * 10.5,
                               decoration: BoxDecoration(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(10)),
-                                  color: AppColors.white),
-                            )
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10)),
+                                color: AppColors.white,
+                              ),
+                              child: FutureBuilder(
+                                future: db
+                                    .collection('jobs')
+                                    .where('enrolled', arrayContains: labour_id)
+                                    .get(),
+                                builder: (context, snapshot) {
+                                  if (snapshot.connectionState ==
+                                      ConnectionState.waiting) {
+                                    return const Center(
+                                        child: CircularProgressIndicator());
+                                  } else {
+                                    if (snapshot.hasError) {
+                                      return Center(
+                                          child:
+                                              Text('Error: ${snapshot.error}'));
+                                    } else {
+                                      return Center(
+                                          child: ListView.builder(
+                                              itemCount:
+                                                  snapshot.data!.docs.length,
+                                              itemBuilder: (context, index) {
+                                                return ListTile(
+                                                  onTap: () {},
+                                                  leading: Icon(
+                                                    Icons.check,
+                                                    color: AppColors.orange,
+                                                  ),
+                                                  trailing: Text(
+                                                      snapshot.data!.docs[index]
+                                                          ['paymentPerHead']),
+                                                  subtitle: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Text(snapshot
+                                                              .data!.docs[index]
+                                                          ['start_date']),
+                                                      Text(snapshot
+                                                              .data!.docs[index]
+                                                          ['location']),
+                                                    ],
+                                                  ),
+                                                  title: Text(snapshot.data!
+                                                      .docs[index]['job_name']),
+                                                );
+                                              })); // snapshot.data  :- get your object which is pass from your downloadData() function
+                                    }
+                                  }
+                                },
+                              ))
                           : SizedBox(
                               height: Dimensions.height10,
                             ),

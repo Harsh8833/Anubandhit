@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:anubandhit/app/modules/homepage/model/job_model.dart';
+import 'package:anubandhit/helper/shared_preferences.dart';
 import 'package:anubandhit/utils/dimensions.dart';
 import 'package:anubandhit/widgets/big_text.dart';
 import 'package:anubandhit/widgets/button.dart';
@@ -8,19 +11,23 @@ import 'package:flutter/material.dart';
 
 import '../../../../utils/colors.dart';
 
-class DetailJob extends StatelessWidget {
+class DetailJob extends StatefulWidget {
   static const route = '/detailJob';
   static launch(BuildContext context, JobModel job) =>
       Navigator.of(context, rootNavigator: true)
           .pushNamed(route, arguments: job);
   DetailJob({super.key});
+
+  @override
+  State<DetailJob> createState() => _DetailJobState();
+}
+
+class _DetailJobState extends State<DetailJob> {
   String eligiblity = "";
+
   @override
   Widget build(BuildContext context) {
     final job = ModalRoute.of(context)!.settings.arguments as JobModel;
-    job.eligibility.forEach((element) {
-      eligiblity = "$eligiblity$element\n";
-    });
 
     return Scaffold(
       body: SafeArea(
@@ -173,10 +180,19 @@ class DetailJob extends StatelessWidget {
                             if (snapshot.hasError) {
                               return Text('Error: ${snapshot.error}');
                             } else {
-                              return KeyValueText(
-                                  icon: Icons.lock,
-                                  keyText: ' Company :  ',
-                                  value: snapshot.data!.docs[0]['name']);
+                              if (snapshot.data!.docs.isNotEmpty) {
+                                return KeyValueText(
+                                    icon: Icons.lock,
+                                    keyText: ' Company :  ',
+                                    value: snapshot.data!.docs[0]
+                                        ['company_name']);
+                              } else {
+                                return KeyValueText(
+                                    icon: Icons.lock,
+                                    keyText: ' Company :  ',
+                                    value: 'N/A');
+                              }
+
                               // snapshot.data  :- get your object which is pass from your downloadData() function
                             }
                           }
@@ -188,7 +204,7 @@ class DetailJob extends StatelessWidget {
                       KeyValueText(
                           icon: Icons.checklist_outlined,
                           keyText: ' Eligibility :  ',
-                          value: eligiblity),
+                          value: job.eligibility),
                       SizedBox(
                         height: Dimensions.height15,
                       ),
@@ -214,7 +230,9 @@ class DetailJob extends StatelessWidget {
                       Align(
                           alignment: Alignment.centerRight,
                           child: Button(
-                            on_pressed: () {},
+                            on_pressed: () async {
+                              await applyJob(context, job);
+                            },
                             text: 'Apply Now',
                             width: Dimensions.width40 * 3,
                             height: Dimensions.height40 * 1.5,
@@ -228,5 +246,52 @@ class DetailJob extends StatelessWidget {
         ),
       )),
     );
+  }
+
+  Future applyJob(BuildContext context, job) async {
+    var db = FirebaseFirestore.instance;
+    var job_db = db.collection('jobs').doc(job.id);
+    var labour_id = await SPController().getLabourId();
+    if (job.enrolled.contains(labour_id)) {
+      log("Already applied");
+      applyPopup(context, "You have already Registered");
+    } else {
+      log("Registering");
+
+      job.enrolled.add(labour_id);
+      await job_db.update({
+        "current_vacancy": job.current_vacancy - 1,
+        'enrolled': job.enrolled
+      });
+      setState(() {
+        job.current_vacancy = job.current_vacancy - 1;
+      });
+      await applyPopup(context, "Applied Successfully");
+    }
+  }
+
+  Future<dynamic> applyPopup(BuildContext context, text) {
+    return showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return Dialog(
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+            child: Container(
+              height: 100,
+              padding: const EdgeInsets.all(24),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const SizedBox(
+                    width: 15,
+                  ),
+                  Text(text),
+                ],
+              ),
+            ),
+          );
+        });
   }
 }

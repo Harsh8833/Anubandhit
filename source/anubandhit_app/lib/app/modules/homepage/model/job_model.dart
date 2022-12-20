@@ -1,7 +1,8 @@
-class   JobModel {
+class JobModel {
+  String? id;
   int current_vacancy;
   String duration;
-  List<dynamic> eligibility;
+  String eligibility;
   Future<String> image;
   String location;
   String name;
@@ -11,7 +12,9 @@ class   JobModel {
   int total_vacancy;
   String type;
   final company;
+  List enrolled;
   JobModel(
+      this.id,
       this.current_vacancy,
       this.duration,
       this.eligibility,
@@ -23,5 +26,6 @@ class   JobModel {
       this.start_date,
       this.total_vacancy,
       this.type,
-    this.company);
+      this.company,
+      this.enrolled);
 }
